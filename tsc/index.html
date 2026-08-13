@@ -78,6 +78,8 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.04;letter-s
 .util a:hover{color:#fff}
 .util-right{display:flex;gap:22px;align-items:center}
 @media(max-width:860px){.util-left{display:none}.util-in{justify-content:center}}
+/* sticky call bar covers this on phones — drop the clutter */
+@media(max-width:640px){.util{display:none}.concept{font-size:9.5px;letter-spacing:.1em;padding:6px 12px}}
 
 /* ============ nav ============ */
 .nav{position:sticky;top:0;z-index:80;background:var(--ink);border-bottom:1px solid var(--rule-dark)}
