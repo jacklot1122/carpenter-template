@@ -101,6 +101,7 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.04;letter-s
   padding:11px 20px;border:none;transition:background .15s;flex:none;
 }
 .nav-cta:hover{background:var(--orange-dim)}
+.mob-only{display:none}
 .burger{display:none;background:none;border:1px solid var(--rule-dark);padding:10px;cursor:pointer;flex:none}
 .burger span{display:block;width:20px;height:2px;background:#fff;margin:4px 0;transition:transform .2s,opacity .2s}
 .nav.open .burger span:nth-child(1){transform:translateY(6px) rotate(45deg)}
@@ -118,6 +119,8 @@ h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.04;letter-s
   .menu li{border-bottom:1px solid var(--rule-dark)}
   .menu a{display:block;padding:16px var(--gut);font-size:16px;border-bottom:none}
   .nav-cta.desk{display:none}
+  .mob-only{display:block;border-bottom:none!important}
+  .nav-cta.mob{margin:14px var(--gut) 0;text-align:center}
 }
 
 /* ============ hero ============ */
@@ -374,7 +377,7 @@ footer a:hover{color:var(--orange)}
       <li><a href="#clients">Clients</a></li>
       <li><a href="#areas">Service Areas</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a class="nav-cta" href="#contact" style="display:block;text-align:center;margin:14px var(--gut) 0">Request a quote</a></li>
+      <li class="mob-only"><a class="nav-cta mob" href="#contact">Request a quote</a></li>
     </ul>
     <a class="nav-cta desk" href="#contact">Request a quote</a>
     <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="menu">
