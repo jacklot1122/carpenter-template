@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Professional carpenter website template — licensed &amp; insured, decks, kitchens, cabinetry and more.">
+<title>Carpenter Site Template</title>
+<style>
+  :root{
+    --ply:#F7F3EB;          /* birch ply ground */
+    --ply-deep:#EFE8DA;     /* panel tone */
+    --ink:#2B241D;          /* espresso ink */
+    --ink-soft:#6B5F52;     /* pencil grey-brown */
+    --pine:#1E4B3C;         /* deep pine green accent */
+    --pine-deep:#143528;
+    --brass:#B98A2F;        /* brass hardware */
+    --tape:#FBE9A6;         /* masking tape */
+    --tape-edge:#D9B94A;
+    --line:#D8CDBB;
+    --white:#FFFFFF;
+    --display:"Rockwell","Rockwell Nova","Roboto Slab","Courier New",serif;
+    --body:"Gill Sans MT","Gill Sans","Trebuchet MS",Verdana,sans-serif;
+    --mono:Consolas,"Courier New",monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+  }
+  body{
+    background:var(--ply);
+    color:var(--ink);
+    font-family:var(--body);
+    font-size:17px;
+    line-height:1.6;
+  }
+  ::selection{background:var(--tape)}
+
+  /* ---------- placeholder "masking tape" slots ---------- */
+  .fill{
+    font-family:var(--mono);
+    font-size:.82em;
+    letter-spacing:.02em;
+    background:var(--tape);
+    border:1px dashed var(--tape-edge);
+    border-radius:2px;
+    padding:.08em .45em;
+    white-space:nowrap;
+    color:#6B5410;
+  }
+  .fill.blocky{white-space:normal;display:inline-block;line-height:1.45}
+
+  /* ---------- ruler motif ---------- */
+  .ruler{
+    height:14px;width:120px;margin-top:14px;
+    background:
+      repeating-linear-gradient(90deg,
+        var(--brass) 0 2px, transparent 2px 12px),
+      linear-gradient(var(--brass),var(--brass)) bottom/100% 2px no-repeat;
+    opacity:.85;
+  }
+  .ruler.center{margin-left:auto;margin-right:auto}
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--pine);font-weight:bold;
+  }
+
+  h1,h2,h3{font-family:var(--display);line-height:1.12;text-wrap:balance;font-weight:700}
+
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  section{padding:88px 0}
+
+  /* ---------- top note bar ---------- */
+  .demo-note{
+    background:var(--ink);color:#E9E1D4;
+    font-family:var(--mono);font-size:12.5px;
+    text-align:center;padding:8px 16px;letter-spacing:.04em;
+  }
+  .demo-note b{color:var(--tape)}
+
+  /* ---------- nav ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(247,243,235,.94);
+    border-bottom:1px solid var(--line);
+    backdrop-filter:blur(6px);
+  }
+  .nav-inner{
+    max-width:1120px;margin:0 auto;padding:14px 24px;
+    display:flex;align-items:center;justify-content:space-between;gap:24px;
+  }
+  .logo{
+    font-family:var(--display);font-weight:700;font-size:20px;
+    display:flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none;
+  }
+  .logo-mark{
+    width:34px;height:34px;flex:none;
+    background:var(--pine);color:var(--tape);
+    display:grid;place-items:center;
+    font-size:17px;border-radius:3px;
+    box-shadow:2px 2px 0 var(--brass);
+  }
+  .nav-links{display:flex;gap:26px;align-items:center;list-style:none}
+  .nav-links a{
+    text-decoration:none;color:var(--ink-soft);font-size:15px;letter-spacing:.02em;
+  }
+  .nav-links a:hover,.nav-links a:focus-visible{color:var(--pine)}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+  .nav-cta{
+    background:var(--pine);color:#fff!important;
+    padding:9px 18px;border-radius:3px;font-weight:600;
+    box-shadow:2px 2px 0 var(--brass);
+  }
+  .nav-cta:hover{background:var(--pine-deep)}
+
+  /* mobile hamburger menu (checkbox hack, no JS) */
+  .nav-toggle{display:none}
+  .hamburger{display:none;cursor:pointer;padding:8px;flex:none}
+  .hamburger span,
+  .hamburger span::before,
+  .hamburger span::after{
+    display:block;content:"";
+    width:24px;height:3px;background:var(--ink);border-radius:2px;
+    transition:transform .2s ease,opacity .2s ease;
+  }
+  .hamburger span{position:relative}
+  .hamburger span::before{position:absolute;top:-8px}
+  .hamburger span::after{position:absolute;top:8px}
+  .nav-toggle:checked ~ .hamburger span{transform:rotate(45deg)}
+  .nav-toggle:checked ~ .hamburger span::before{transform:rotate(-90deg);top:0}
+  .nav-toggle:checked ~ .hamburger span::after{opacity:0}
+  .nav-toggle:focus-visible ~ .hamburger{outline:3px solid var(--brass);outline-offset:2px}
+  @media(max-width:760px){
+    .hamburger{display:block}
+    .nav-links{
+      display:none;
+      position:absolute;top:100%;left:0;right:0;
+      flex-direction:column;align-items:stretch;gap:0;
+      background:var(--ply);border-bottom:2px solid var(--pine);
+      box-shadow:0 12px 24px rgba(43,36,29,.15);
+      padding:8px 0 16px;
+    }
+    .nav-toggle:checked ~ .nav-links{display:flex}
+    .nav-links a{display:block;padding:13px 24px;font-size:17px}
+    .nav-cta{margin:10px 24px 0;text-align:center;padding:13px 18px}
+    .nav-inner{position:relative}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:96px 0 100px;
+    background:
+      radial-gradient(1100px 500px at 85% -10%, rgba(185,138,47,.10), transparent 60%),
+      repeating-linear-gradient(90deg, transparent 0 119px, rgba(43,36,29,.045) 119px 120px),
+      var(--ply);
+    border-bottom:1px solid var(--line);
+  }
+  .hero-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:64px;align-items:center}
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+  .hero h1{font-size:clamp(38px,5.4vw,60px);margin:18px 0 20px}
+  .hero h1 .accent{color:var(--pine)}
+  .hero p.lede{font-size:19px;color:var(--ink-soft);max-width:34em}
+  .hero-ctas{display:flex;gap:16px;margin-top:34px;flex-wrap:wrap}
+  .btn{
+    font-family:var(--body);font-size:16px;font-weight:600;
+    padding:14px 26px;border-radius:3px;text-decoration:none;cursor:pointer;border:none;
+    display:inline-block;
+  }
+  .btn-primary{background:var(--pine);color:#fff;box-shadow:3px 3px 0 var(--brass)}
+  .btn-primary:hover{background:var(--pine-deep);transform:translate(1px,1px);box-shadow:2px 2px 0 var(--brass)}
+  .btn-ghost{background:transparent;color:var(--pine);border:2px solid var(--pine)}
+  .btn-ghost:hover{background:rgba(30,75,60,.07)}
+  .hero-sub{margin-top:22px;font-size:14px;color:var(--ink-soft)}
+
+  /* photo placeholder frames */
+  .photo{
+    border:2px solid var(--ink);
+    background:
+      repeating-linear-gradient(45deg, rgba(43,36,29,.06) 0 14px, transparent 14px 28px),
+      var(--ply-deep);
+    display:grid;place-items:center;text-align:center;
+    color:var(--ink-soft);
+    box-shadow:6px 6px 0 rgba(30,75,60,.18);
+    padding:20px;
+  }
+  .photo .cam{font-size:30px;display:block;margin-bottom:10px}
+  .hero-photo{aspect-ratio:4/5;transform:rotate(1.2deg)}
+
+  /* ---------- trust bar ---------- */
+  .trust{background:var(--pine);color:#EDE7DA;padding:34px 0}
+  .trust-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;text-align:center}
+  @media(max-width:760px){.trust-grid{grid-template-columns:repeat(2,1fr)}}
+  .trust .num{font-family:var(--display);font-size:34px;color:var(--tape);font-variant-numeric:tabular-nums}
+  .trust .lbl{font-size:13.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
+  .trust .fill{background:rgba(251,233,166,.16);color:var(--tape);border-color:rgba(251,233,166,.5)}
+
+  /* ---------- section headers ---------- */
+  .sec-head{max-width:640px;margin-bottom:52px}
+  .sec-head.centered{margin-left:auto;margin-right:auto;text-align:center}
+  .sec-head h2{font-size:clamp(28px,3.6vw,40px);margin-top:12px}
+  .sec-head p{color:var(--ink-soft);margin-top:14px}
+
+  /* ---------- services ---------- */
+  .services{background:var(--ply)}
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  @media(max-width:900px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){.svc-grid{grid-template-columns:1fr}}
+  .svc{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-top:4px solid var(--pine);
+    padding:28px 26px 30px;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .svc:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(43,36,29,.10)}
+  .svc-icon{
+    width:44px;height:44px;border-radius:3px;
+    background:rgba(30,75,60,.09);color:var(--pine);
+    display:grid;place-items:center;font-size:21px;margin-bottom:18px;
+  }
+  .svc h3{font-size:20px;margin-bottom:10px}
+  .svc p{font-size:15.5px;color:var(--ink-soft)}
+
+  /* ---------- about ---------- */
+  .about{background:var(--ply-deep);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .about-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;align-items:center}
+  @media(max-width:900px){.about-grid{grid-template-columns:1fr}}
+  .about-photo{aspect-ratio:1/1;transform:rotate(-1.4deg)}
+  .about h2{font-size:clamp(28px,3.6vw,38px);margin-top:12px}
+  .about p{margin-top:16px;color:var(--ink-soft)}
+  .badges{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+  .badge{
+    font-size:13.5px;font-weight:600;letter-spacing:.03em;
+    background:var(--white);border:1px solid var(--line);border-left:4px solid var(--brass);
+    padding:8px 14px;
+  }
+
+  /* ---------- gallery ---------- */
+  .gal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  @media(max-width:900px){.gal-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:600px){.gal-grid{grid-template-columns:1fr}}
+  .gal-item .photo{aspect-ratio:4/3;box-shadow:4px 4px 0 rgba(30,75,60,.15)}
+  .gal-item figcaption{
+    margin-top:12px;font-size:14.5px;color:var(--ink-soft);
+    display:flex;justify-content:space-between;gap:12px;align-items:baseline;
+  }
+  .gal-tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--pine);flex:none}
+
+  /* ---------- testimonials ---------- */
+  .quotes{background:var(--ink);color:#E9E1D4}
+  .quotes .eyebrow{color:var(--tape)}
+  .quotes .sec-head p{color:#B9AC99}
+  .q-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px}
+  @media(max-width:900px){.q-grid{grid-template-columns:1fr}}
+  .q{
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(233,225,212,.14);
+    padding:28px 26px;
+    display:flex;flex-direction:column;gap:18px;
+  }
+  .q .stars{color:var(--brass);letter-spacing:3px;font-size:15px}
+  .q blockquote{font-size:15.5px;line-height:1.65;color:#D8CEBE}
+  .q .who{font-family:var(--display);font-size:15px;color:var(--tape)}
+  .quotes .fill{background:rgba(251,233,166,.12);color:var(--tape);border-color:rgba(251,233,166,.4)}
+
+  /* ---------- service area ---------- */
+  .area-grid{display:grid;grid-template-columns:minmax(0,6fr) minmax(0,6fr);gap:64px;align-items:center}
+  @media(max-width:900px){.area-grid{grid-template-columns:1fr}}
+  .suburbs{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px;list-style:none}
+  .suburbs li{
+    background:var(--white);border:1px solid var(--line);
+    padding:7px 14px;font-size:14.5px;border-radius:2px;
+  }
+  .map-frame{aspect-ratio:16/11}
+
+  /* ---------- quote form ---------- */
+  .quote-sec{background:var(--ply-deep);border-top:1px solid var(--line)}
+  .quote-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px}
+  @media(max-width:900px){.quote-grid{grid-template-columns:1fr}}
+  .contact-lines{margin-top:28px;display:flex;flex-direction:column;gap:16px;font-size:16px}
+  .contact-lines .row{display:flex;gap:14px;align-items:baseline}
+  .contact-lines .ico{color:var(--pine);flex:none;width:22px;text-align:center}
+  form{
+    background:var(--white);border:1px solid var(--line);
+    border-top:4px solid var(--brass);
+    padding:34px 32px;display:grid;gap:18px;
+  }
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:600px){.form-row{grid-template-columns:1fr}}
+  label{font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-soft);display:block;margin-bottom:7px}
+  input,select,textarea{
+    width:100%;font-family:var(--body);font-size:16px;color:var(--ink);
+    background:var(--ply);border:1px solid var(--line);border-radius:2px;
+    padding:12px 14px;
+  }
+  input:focus,select:focus,textarea:focus{outline:2px solid var(--pine);outline-offset:1px;background:#fff}
+  textarea{resize:vertical;min-height:110px}
+  .form-note{font-size:13px;color:var(--ink-soft)}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--ink);color:#B9AC99;padding:56px 0 40px;font-size:14.5px}
+  .foot-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:48px}
+  @media(max-width:760px){.foot-grid{grid-template-columns:1fr}}
+  footer .logo{color:#E9E1D4;margin-bottom:14px}
+  footer h4{font-family:var(--display);color:#E9E1D4;font-size:15px;letter-spacing:.06em;margin-bottom:14px;text-transform:uppercase}
+  footer ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+  footer a{color:#B9AC99;text-decoration:none}
+  footer a:hover{color:var(--tape)}
+  .foot-bottom{
+    border-top:1px solid rgba(233,225,212,.15);margin-top:44px;padding-top:22px;
+    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:13px;
+  }
+  footer .fill{background:rgba(251,233,166,.12);color:var(--tape);border-color:rgba(251,233,166,.4)}
+
+  /* ---------- small-screen refinements ---------- */
+  img,svg,video{max-width:100%}
+  @media(max-width:600px){
+    body{font-size:16px}
+    section{padding:56px 0}
+    .hero{padding:56px 0 64px}
+    .hero-grid,.about-grid,.area-grid,.quote-grid{gap:40px}
+    .sec-head{margin-bottom:36px}
+    .fill{white-space:normal}
+    .hero-ctas .btn{flex:1 1 auto;text-align:center}
+    .trust-grid{gap:18px}
+    .trust .num{font-size:28px}
+    form{padding:26px 20px}
+    .gal-item figcaption{flex-direction:column;gap:4px}
+    .foot-bottom{flex-direction:column;gap:8px}
+  }
+</style>
+
+</head>
+<body>
+<div class="demo-note">TEMPLATE PREVIEW — every <b>[yellow tag]</b> is a fill-in slot: your name, photos &amp; details go there. Colours &amp; layout fully customisable.</div>
+
+<nav>
+  <div class="nav-inner">
+    <a class="logo" href="#top">
+      <span class="logo-mark">⚒</span>
+      <span class="fill">[BUSINESS NAME]</span>
+    </a>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu">
+    <label for="nav-toggle" class="hamburger" aria-hidden="true"><span></span></label>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#area">Service Area</a></li>
+      <li><a class="nav-cta" href="#quote">Get a Free Quote</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Licensed &amp; Insured · <span class="fill">[REGION / CITY]</span></span>
+      <h1>Quality carpentry,<br><span class="accent">built to last.</span></h1>
+      <p class="lede">
+        <span class="fill blocky">[ONE-LINE PITCH — e.g. "From decks and pergolas to full kitchen fit-outs, we deliver honest workmanship, on time and on budget."]</span>
+      </p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#quote">Get a Free Quote</a>
+        <a class="btn btn-ghost" href="tel:0000000000">Call <span class="fill">[PHONE]</span></a>
+      </div>
+      <p class="hero-sub">★★★★★ Rated <span class="fill">[4.9]</span> from <span class="fill">[120+]</span> local reviews</p>
+      <div class="ruler" aria-hidden="true"></div>
+    </div>
+    <div class="photo hero-photo">
+      <div>
+        <span class="cam">📷</span>
+        <span class="fill blocky">[INSERT HERO PHOTO — your best finished job or you on site]</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="trust">
+  <div class="wrap trust-grid">
+    <div><div class="num"><span class="fill">[15]</span>+</div><div class="lbl">Years Experience</div></div>
+    <div><div class="num"><span class="fill">[400]</span>+</div><div class="lbl">Jobs Completed</div></div>
+    <div><div class="num"><span class="fill">[10]</span>yr</div><div class="lbl">Workmanship Warranty</div></div>
+    <div><div class="num">100%</div><div class="lbl">Licensed &amp; Insured</div></div>
+  </div>
+</div>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="sec-head centered">
+      <span class="eyebrow">What We Do</span>
+      <h2>Services</h2>
+      <div class="ruler center" aria-hidden="true"></div>
+      <p>Swap, add or remove any of these six cards to match the trades you actually offer.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc"><div class="svc-icon">🪚</div><h3><span class="fill">[Decks &amp; Pergolas]</span></h3><p><span class="fill blocky">[2–3 lines describing this service and why customers choose you for it.]</span></p></div>
+      <div class="svc"><div class="svc-icon">🚪</div><h3><span class="fill">[Doors &amp; Windows]</span></h3><p><span class="fill blocky">[2–3 lines describing this service and why customers choose you for it.]</span></p></div>
+      <div class="svc"><div class="svc-icon">🍳</div><h3><span class="fill">[Kitchen Fit-outs]</span></h3><p><span class="fill blocky">[2–3 lines describing this service and why customers choose you for it.]</span></p></div>
+      <div class="svc"><div class="svc-icon">🏗️</div><h3><span class="fill">[Framing &amp; Structural]</span></h3><p><span class="fill blocky">[2–3 lines describing this service and why customers choose you for it.]</span></p></div>
+      <div class="svc"><div class="svc-icon">🗄️</div><h3><span class="fill">[Custom Cabinetry]</span></h3><p><span class="fill blocky">[2–3 lines describing this service and why customers choose you for it.]</span></p></div>
+      <div class="svc"><div class="svc-icon">🔧</div><h3><span class="fill">[Repairs &amp; Maintenance]</span></h3><p><span class="fill blocky">[2–3 lines describing this service and why customers choose you for it.]</span></p></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="photo about-photo">
+      <div>
+        <span class="cam">📷</span>
+        <span class="fill blocky">[INSERT PHOTO — headshot or team photo on site]</span>
+      </div>
+    </div>
+    <div>
+      <span class="eyebrow">Meet Your Carpenter</span>
+      <h2>Hi, I'm <span class="fill">[FIRST NAME]</span> 👋</h2>
+      <p><span class="fill blocky">[YOUR STORY — 3–4 sentences. How long you've been on the tools, what you specialise in, and what customers can expect when they hire you. Keep it warm and plain-spoken.]</span></p>
+      <p><span class="fill blocky">[SECOND PARAGRAPH — optional. Family business? Apprentice-trained? Local to the area? This is where trust gets built.]</span></p>
+      <div class="badges">
+        <span class="badge">Licence No. <span class="fill">[XXXXXX]</span></span>
+        <span class="badge">Fully Insured</span>
+        <span class="badge"><span class="fill">[Master Builders Member]</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head centered">
+      <span class="eyebrow">Recent Work</span>
+      <h2>Projects</h2>
+      <div class="ruler center" aria-hidden="true"></div>
+      <p>Six of your best before-and-afters go here. Real photos sell jobs — phone photos are fine.</p>
+    </div>
+    <div class="gal-grid">
+      <figure class="gal-item"><div class="photo"><div><span class="cam">📷</span><span class="fill">[PROJECT PHOTO 1]</span></div></div><figcaption><span class="fill">[Merbau deck — Smithfield]</span><span class="gal-tag">Decking</span></figcaption></figure>
+      <figure class="gal-item"><div class="photo"><div><span class="cam">📷</span><span class="fill">[PROJECT PHOTO 2]</span></div></div><figcaption><span class="fill">[Kitchen reno — Northside]</span><span class="gal-tag">Kitchens</span></figcaption></figure>
+      <figure class="gal-item"><div class="photo"><div><span class="cam">📷</span><span class="fill">[PROJECT PHOTO 3]</span></div></div><figcaption><span class="fill">[Built-in wardrobes]</span><span class="gal-tag">Cabinetry</span></figcaption></figure>
+      <figure class="gal-item"><div class="photo"><div><span class="cam">📷</span><span class="fill">[PROJECT PHOTO 4]</span></div></div><figcaption><span class="fill">[Pergola &amp; louvres]</span><span class="gal-tag">Outdoor</span></figcaption></figure>
+      <figure class="gal-item"><div class="photo"><div><span class="cam">📷</span><span class="fill">[PROJECT PHOTO 5]</span></div></div><figcaption><span class="fill">[Stair rebuild]</span><span class="gal-tag">Structural</span></figcaption></figure>
+      <figure class="gal-item"><div class="photo"><div><span class="cam">📷</span><span class="fill">[PROJECT PHOTO 6]</span></div></div><figcaption><span class="fill">[Feature timber wall]</span><span class="gal-tag">Interiors</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="quotes">
+  <div class="wrap">
+    <div class="sec-head centered">
+      <span class="eyebrow">Word of Mouth</span>
+      <h2 style="color:#F0E9DB">What Customers Say</h2>
+      <div class="ruler center" aria-hidden="true"></div>
+      <p>Paste in your three best Google or Facebook reviews, word for word.</p>
+    </div>
+    <div class="q-grid">
+      <div class="q"><div class="stars">★★★★★</div><blockquote>"<span class="fill blocky">[REVIEW 1 — copy a real review here]</span>"</blockquote><div class="who">— <span class="fill">[Customer name, suburb]</span></div></div>
+      <div class="q"><div class="stars">★★★★★</div><blockquote>"<span class="fill blocky">[REVIEW 2 — copy a real review here]</span>"</blockquote><div class="who">— <span class="fill">[Customer name, suburb]</span></div></div>
+      <div class="q"><div class="stars">★★★★★</div><blockquote>"<span class="fill blocky">[REVIEW 3 — copy a real review here]</span>"</blockquote><div class="who">— <span class="fill">[Customer name, suburb]</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="area">
+  <div class="wrap area-grid">
+    <div>
+      <span class="eyebrow">Where We Work</span>
+      <h2 style="font-size:clamp(28px,3.6vw,38px);margin-top:12px">Servicing <span class="fill">[REGION]</span> and surrounds</h2>
+      <div class="ruler" aria-hidden="true"></div>
+      <p style="margin-top:18px;color:var(--ink-soft)">List the suburbs you actually cover — it's great for Google search rankings too.</p>
+      <ul class="suburbs">
+        <li><span class="fill">[Suburb 1]</span></li>
+        <li><span class="fill">[Suburb 2]</span></li>
+        <li><span class="fill">[Suburb 3]</span></li>
+        <li><span class="fill">[Suburb 4]</span></li>
+        <li><span class="fill">[Suburb 5]</span></li>
+        <li><span class="fill">[Suburb 6]</span></li>
+        <li>+ more on request</li>
+      </ul>
+    </div>
+    <div class="photo map-frame">
+      <div>
+        <span class="cam">🗺️</span>
+        <span class="fill blocky">[INSERT MAP — embedded Google Map of your service area]</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote-sec" id="quote">
+  <div class="wrap quote-grid">
+    <div>
+      <span class="eyebrow">Free, No-Obligation</span>
+      <h2 style="font-size:clamp(28px,3.6vw,38px);margin-top:12px">Get a quote</h2>
+      <div class="ruler" aria-hidden="true"></div>
+      <p style="margin-top:18px;color:var(--ink-soft)">Tell us about the job and we'll get back to you within <span class="fill">[24 hours]</span>.</p>
+      <div class="contact-lines">
+        <div class="row"><span class="ico">☎</span><span><span class="fill">[PHONE NUMBER]</span></span></div>
+        <div class="row"><span class="ico">✉</span><span><span class="fill">[EMAIL ADDRESS]</span></span></div>
+        <div class="row"><span class="ico">🕐</span><span>Mon–Sat, <span class="fill">[7am – 5pm]</span></span></div>
+        <div class="row"><span class="ico">📍</span><span>Based in <span class="fill">[SUBURB, STATE]</span></span></div>
+      </div>
+    </div>
+    <form onsubmit="event.preventDefault(); this.querySelector('.form-note').textContent='✔ Demo only — on the live site this sends straight to your email or phone.';">
+      <div class="form-row">
+        <div><label for="f-name">Name</label><input id="f-name" type="text" placeholder="Jane Smith"></div>
+        <div><label for="f-phone">Phone</label><input id="f-phone" type="tel" placeholder="0400 000 000"></div>
+      </div>
+      <div class="form-row">
+        <div><label for="f-suburb">Suburb</label><input id="f-suburb" type="text" placeholder="Your suburb"></div>
+        <div><label for="f-type">Job type</label>
+          <select id="f-type">
+            <option>Deck / Pergola</option>
+            <option>Kitchen / Cabinetry</option>
+            <option>Doors / Windows</option>
+            <option>Repairs</option>
+            <option>Something else</option>
+          </select>
+        </div>
+      </div>
+      <div><label for="f-msg">Tell us about the job</label><textarea id="f-msg" placeholder="Rough size, timing, and anything else useful…"></textarea></div>
+      <button class="btn btn-primary" type="submit">Send Quote Request</button>
+      <p class="form-note">Enquiries go straight to your email &amp; phone — no logins, no fuss.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#top"><span class="logo-mark">⚒</span><span class="fill">[BUSINESS NAME]</span></a>
+        <p style="max-width:36em">Licensed carpenter servicing <span class="fill">[REGION]</span>. Quality workmanship, honest quotes, tidy job sites.</p>
+      </div>
+      <div>
+        <h4>Site</h4>
+        <ul>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#area">Service Area</a></li>
+          <li><a href="#quote">Get a Quote</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><span class="fill">[PHONE NUMBER]</span></li>
+          <li><span class="fill">[EMAIL ADDRESS]</span></li>
+          <li><span class="fill">[ABN / LICENCE NO.]</span></li>
+          <li><span class="fill">[FACEBOOK / INSTAGRAM]</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 <span class="fill">[BUSINESS NAME]</span>. All rights reserved.</span>
+      <span>Website template — ready to customise.</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
